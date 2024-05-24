@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Parking System</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+  }
+  .header {
+    background-color: #2a82e0;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+  }
+  .car-count {
+    text-align: center;
+    font-size: 30px;
+    color: #000000;
+    margin: 50px 0;
+  }
+  .parking-places-container {
+    display: flex;
+    margin-top: 50px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  .parking-place {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #007bff;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(30.33% - 40px); /* Adjust this to change the width of each parking place */
+    margin-right: 10px; /* Adjust this to change the space between parking places */
+    margin-bottom: 20px; /* Adjust this to change the space between rows */
+    height: 300px; /* Adjust this to change the height of each parking place */
+  }
+  .parking-place h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .parking-place-content {
+    display: flex;
+    margin-top: 60px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .car-img {
+    width: 220px;
+    height: 120px;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .empty {
+    font-size: 20px;
+    color: #007bff;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>Parking Status</h1>
+  </div>
+  <div class="car-count">
+    Total Number of Cars: {{ car_count }}
+  </div>
+  <div class="parking-places-container">
+    {% for place, status in parking_status.items() %}
+    <div class="parking-place">
+      <h2>Place {{ place }}</h2>
+      <div class="parking-place-content">
+        {% if status == '1' %}
+        <img src="{{ image_path }}" alt="Car" class="car-img">
+        {% else %}
+        <p class="empty">Empty</p>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <script>
+    // JavaScript to reload the page every 3 seconds
+    setTimeout(function() {
+      location.reload();
+    }, 3000); // 3 seconds delay
+  </script>
+</body>
+</html>

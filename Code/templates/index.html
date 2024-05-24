@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>parking</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            color: #000000;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .plot-container {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .plot {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+        <h1>Parking Data Analysis </h1>
+        </div>
+        {% for fig_json in figs_json %}
+            <div class="plot-container">
+                <div id="plot{{ loop.index }}" class="plot"></div>
+                <script>
+                    var fig_data = {{ fig_json | safe }};
+                    Plotly.newPlot('plot{{ loop.index }}', fig_data.data, fig_data.layout);
+                </script>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
